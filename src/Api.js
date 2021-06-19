@@ -38,3 +38,6 @@ export function uploadImage(file) {
 export function getImage() {
   return axios.get(API_BASE_URL + "/auth/files", autorization);
 }
+
+
+

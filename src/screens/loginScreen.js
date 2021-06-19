@@ -27,7 +27,7 @@ const LoginScreen = () => {
           console.log(res.data.authenticationToken)
           localStorage.setItem("token", res.data.authenticationToken)
           localStorage.setItem("username", res.data.username)
-
+          window.location = "/"
         })
         .catch((err) => {
           console.log(err);

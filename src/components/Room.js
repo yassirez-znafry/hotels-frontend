@@ -12,7 +12,7 @@ const Room = ({room}) => {
       </Link>
 
       <Card.Body>
-        <Link to={`/room/${room.roomId}`}>
+        <Link to={`/room/${room.roomId}`} room={room}>
           <Card.Title as='div'>
             <strong>{room.roomType}</strong>
           </Card.Title>

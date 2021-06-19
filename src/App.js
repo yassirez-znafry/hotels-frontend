@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import LoginScreen from './screens/loginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import RoomScreen from './screens/RoomScreen';
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
           <Route path='/' component={HomeScreen} exact />
           <Route path='/login' component={LoginScreen} exact />
           <Route path='/register' component={RegisterScreen} exact />
-          
+          <Route path='/room/:id' component={RoomScreen} />
 
       </Container>
     </main>
