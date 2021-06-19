@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
-
+import { login } from "../Api";
 
 const LoginScreen = () => {
   
@@ -14,6 +14,24 @@ const LoginScreen = () => {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    const loginRequest = {
+        username:email,
+        password,
+        image: "imgs/default.svg",
+      };
+
+    login(loginRequest)
+        .then((res) => {
+          console.log(res.data);
+          console.log(res.data.authenticationToken)
+          localStorage.setItem("token", res.data.authenticationToken)
+          localStorage.setItem("username", res.data.username)
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
   }
 
   return (
@@ -23,7 +41,7 @@ const LoginScreen = () => {
           <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus
-            type="email"
+            
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
