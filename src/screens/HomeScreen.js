@@ -8,12 +8,15 @@ import Room from '../components/Room';
 const HomeScreen = () => {
   const [rooms, setRooms] = useState([]);
   
+  
+  
   useEffect(() => {
     getAllRooms()
       .then((res) => {
         setRooms(res.data);
       })
       .catch((err) => console.log(err));
+
   }, []);
 
   

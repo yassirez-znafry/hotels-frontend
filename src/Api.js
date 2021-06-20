@@ -16,12 +16,42 @@ const autorization = {
   },
 };
 
+
+// Rooms
 export  function  getAllRooms() {
    
-   return axios.get(API_BASE_URL + "/room/");
+  return axios.get(API_BASE_URL + "/room/");
   
 }
 
+export function getRoomById(room_id){
+  return axios.get(API_BASE_URL + "/room/"+room_id);
+}
+
+
+//Reservations 
+export function getAllReservationsForCurrentUser(){
+  return axios.get(API_BASE_URL + "/reservation/current_user", autorization);
+}
+
+export function addReservation(reservationRequest){
+  return axios.post(API_BASE_URL + "/reservation/add", reservationRequest, autorization);
+}
+
+export function deleteReservation(reservationRequest){
+  return axios.post(API_BASE_URL + "/reservation/cancel", reservationRequest, autorization);
+
+}
+
+
+// Auth
+export function getCurrentUserInfos(){
+  return axios.get(API_BASE_URL + "/auth/user/myInfos", autorization)
+}
+
+export function getCurrentUser(user_id){
+  return axios.get(API_BASE_URL + "/auth/user/" + user_id, autorization)
+}
 
 export function login(loginRequest) {
   return axios.post(API_BASE_URL + "/auth/login", loginRequest);
@@ -31,6 +61,8 @@ export function signup(signupRequest) {
   return axios.post(API_BASE_URL + "/auth/signup", signupRequest);
 }
 
+
+// Images
 export function uploadImage(file) {
   return axios.post(API_BASE_URL + "/auth/upload", file, autorization);
 }

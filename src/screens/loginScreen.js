@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
-import { login } from "../Api";
+import { login , getCurrentUserInfos} from "../Api";
 
 const LoginScreen = () => {
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userInfos, setUserInfos] = useState({});
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -28,6 +29,7 @@ const LoginScreen = () => {
           localStorage.setItem("token", res.data.authenticationToken)
           localStorage.setItem("username", res.data.username)
           window.location = "/"
+        
         })
         .catch((err) => {
           console.log(err);
@@ -38,7 +40,7 @@ const LoginScreen = () => {
     <div className="Login">
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Username</Form.Label>
           <Form.Control
             autoFocus
             

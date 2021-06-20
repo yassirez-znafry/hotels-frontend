@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { getAllRooms } from "../Api";
+import { addReservation, getRoomById } from "../Api";
 import Room from '../components/Room';
 import { Row, Col, Image, ListGroup, Card, Button, Form } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
@@ -9,36 +9,70 @@ import { Link } from 'react-router-dom';
 const RoomScreen = ({match}) => {
 
     const roomId = match.params.id
-    
-    const [rooms, setRooms] = useState([]);
     const [room, setRoom] = useState([]);
+
+    const [adultsNumber, setAdultsNumber] = useState(0)
+    const [childrenNumber, setChildrenNumber] = useState(0)
+    const reservationDate = "0000-00-00"
+    const [reservationCheckInDate, setReservationCheckInDate] = useState("")
+    const [reservationCheckOutDate, setReservationCheckOutDate] = useState("")
+
+    const [userInfos, setUserInfos] = useState({});
   
   useEffect(() => {
-    getAllRooms()
+    if(!localStorage.getItem("username")){
+      window.location = "/";
+    }
+
+    getRoomById(roomId)
       .then((res) => {
-        setRooms(res.data);
-
-        for (let index = 0; index < res.data.length; index++) {
-      const element = res.data[index];
-      console.log(element)
-      if (element.roomId==roomId) {
-          setRoom(element);
+          setRoom(res.data);
           console.log(room)
-      }
-  }
-
       })
       .catch((err) => console.log(err));
+
+      let user = JSON.parse(localStorage.getItem("userInfos"));
+      console.log(user)
+      setUserInfos(user);
+
+    
+
   }, []);
 
 
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    const reservationRequest = {
+        reservationDate,
+        reservationCheckInDate,
+        reservationCheckOutDate,
+        adultsNumber,
+        childrenNumber,
+        roomId: roomId,
+        userId: userInfos.id
+      };
+
+      console.log(reservationRequest)
+
+    addReservation(reservationRequest)
+      .then((res) => {
+        console.log(res.data)
+      })
+      .catch((err) => console.log(err))
+    
+
+
+  }
   
     
 
   console.log(room)
 
     return (
-        <>
+
+      <>
+        
           <Row>
             <Col md={6}>
               <Image src='/logo192.png' alt="{room.name}" fluid />
@@ -100,6 +134,49 @@ const RoomScreen = ({match}) => {
             
           </Row>
           
+
+          <Form onSubmit={handleSubmit}>
+        <Form.Group size="lg" controlId="adultsNumber">
+          <Form.Label>Adults Number</Form.Label>
+          <Form.Control
+            autoFocus
+            type="number"
+            
+            value={adultsNumber}
+            onChange={(e) => setAdultsNumber(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="childrenNumber">
+          <Form.Label>Children Number</Form.Label>
+          <Form.Control
+            type="number"
+            value={childrenNumber}
+            onChange={(e) => setChildrenNumber(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group size="lg" controlId="checkindate">
+          <Form.Label>Check in date</Form.Label>
+          <Form.Control
+            type="date"
+            value={reservationCheckInDate}
+            onChange={(e) => setReservationCheckInDate(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Group size="lg" controlId="checkoutdate">
+          <Form.Label>Check out date</Form.Label>
+          <Form.Control
+            type="date"
+            value={reservationCheckOutDate}
+            onChange={(e) => setReservationCheckOutDate(e.target.value)}
+          />
+        </Form.Group>
+        <Button block size="lg" type="submit">
+          Reserve
+        </Button>
+      </Form>
+
         </>
     )
 }

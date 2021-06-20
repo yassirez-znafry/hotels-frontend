@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import {LinkContainer} from 'react-router-bootstrap'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import React, { useState, useEffect } from 'react'
+import {getCurrentUserInfos} from '../Api'
 
 
 
@@ -10,10 +11,23 @@ const Header = () => {
 
 
 const [username, setUsername] = useState("");
+const [userInfos, setUserInfos] = useState({});
+const [showDashboard, setShowDashboard] = useState(false);
 
 
 useEffect(() => {
     setUsername(localStorage.getItem("username"))
+    setUserInfos(localStorage.getItem("userInfos"))
+    if(!localStorage.getItem("userInfos")){
+      getCurrentUserInfos()
+            .then((res) => {
+              localStorage.setItem("userInfos", JSON.stringify(res.data))
+              setUserInfos(res.data);
+              if(res.data.accessLevel >= 1) setShowDashboard(true);
+              console.log("------------------ OK -------------"+localStorage.getItem("userInfos"))
+            })
+            .catch((err) => console.log(err))
+    }
   }, []);
 
 
@@ -21,6 +35,7 @@ useEffect(() => {
  function logoutHandler() {
    localStorage.removeItem("username")
    localStorage.removeItem("token")
+   localStorage.removeItem("userInfos")
    window.location = "/"
 } 
     return (
@@ -29,12 +44,18 @@ useEffect(() => {
             <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
                 <Container>
                       <LinkContainer to='/'>
-                            <Navbar.Brand><i class="fas fa-hotel"></i> HOTELS <i class="fas fa-hotel"></i>
+                            <Navbar.Brand><i class="fas fa-hotel"></i> HOTEL MANAGER <i class="fas fa-hotel"></i>
                             </Navbar.Brand>
                       </LinkContainer>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
+
+                {showDashboard ? (
+                  <LinkContainer to='/dashboard'>
+        <Nav.Link>Dashboard <i className="fas fa-user"></i></Nav.Link>
+        </LinkContainer>
+                ):( "" )}
         
         {username ? (
                   <LinkContainer to='/profile'>
