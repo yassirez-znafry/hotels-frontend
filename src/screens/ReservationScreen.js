@@ -16,21 +16,14 @@ const ReservationScreen = ({match}) => {
     const [reservationCheckInDate, setReservationCheckInDate] = useState("")
     const [reservationCheckOutDate, setReservationCheckOutDate] = useState("")
 
-    const [userInfos, setUserInfos] = useState({});
+    const [reservationUserInfos, setReservationUserInfos] = useState({});
 
 
      useEffect(() => {
     if(!localStorage.getItem("username")){
       window.location = "/";
     }
-
-    
-
-      let user = JSON.parse(localStorage.getItem("userInfos"));
-      console.log(user)
-      setUserInfos(user);
-
-    
+      setReservationUserInfos(JSON.parse(localStorage.getItem("userInfos")));
 
   }, []);
 
@@ -45,7 +38,7 @@ const ReservationScreen = ({match}) => {
         reservationCheckOutDate,
         adultsNumber,
         childrenNumber,
-        userId: userInfos.id
+        userId: reservationUserInfos.id
       };
 
       console.log(reservationRequest)
@@ -53,6 +46,7 @@ const ReservationScreen = ({match}) => {
     modifyReservation(reservationRequest)
       .then((res) => {
         console.log(res.data)
+        alert("Modification successed")
       })
       .catch((err) => console.log(err))
 

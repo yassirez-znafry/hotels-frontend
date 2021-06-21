@@ -7,7 +7,6 @@ import Room from '../components/Room';
 
 const HomeScreen = () => {
   const [reservations, setReservations] = useState([]);
-  const [userInfos, setUserInfos] = useState({});
   
   useEffect(() => {
     getAllReservationsForCurrentUser()
@@ -16,11 +15,6 @@ const HomeScreen = () => {
       })
       .catch((err) => console.log(err));
 
-    getCurrentUserInfos()
-      .then((res) => {
-        setUserInfos(res.data)
-      })
-      .catch((err) => console.log(err))
   }, []);
 
   function handleDelete(e, index){
@@ -60,7 +54,6 @@ const HomeScreen = () => {
   }
   
   console.log(reservations)
-  console.log(userInfos)
   
 
    return (

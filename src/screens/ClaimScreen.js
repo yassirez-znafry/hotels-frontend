@@ -8,16 +8,11 @@ import { Link } from 'react-router-dom';
 const ClaimScreen = () => {
 
     const [content, setContent] = useState("") 
-    const [userInfos, setUserInfos] = useState({});
   
   useEffect(() => {
     if(!localStorage.getItem("username")){
       window.location = "/";
     }
-
-    let user = JSON.parse(localStorage.getItem("userInfos"));
-    console.log(user)
-    setUserInfos(user);
 
   }, []);
 

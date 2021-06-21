@@ -11,6 +11,9 @@ import ProfileScreen from './screens/ProfileScreen';
 import RoomScreen from './screens/RoomScreen';
 import ReservationScreen from './screens/ReservationScreen';
 import ClaimScreen from './screens/ClaimScreen';
+import DashboardScreen from './screens/DashboardScreen';
+import DashboardUserScreen from './screens/DashboardUserScreen';
+import DashboardPaymentScreen from './screens/DashboardPaymentScreen';
 
 
 function App() {
@@ -28,6 +31,10 @@ function App() {
           <Route path='/profile' component={ProfileScreen} />
           <Route path='/reservation/:id' component={ReservationScreen} />
           <Route path='/claim' component={ClaimScreen} />
+          <Route path='/dashboard_user/:id' component={DashboardUserScreen} />
+          <Route path='/dashboard' component={DashboardScreen} />
+          <Route path='/dashboard_payment/:user_id/:rent_id' component={DashboardPaymentScreen} />
+          
 
       </Container>
     </main>

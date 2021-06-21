@@ -58,8 +58,9 @@ const RoomScreen = ({match}) => {
     addReservation(reservationRequest)
       .then((res) => {
         console.log(res.data)
+        alert("Reservation added successfully")
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {console.log(err); alert("Adding reservation failed")})
     
 
 

@@ -30,6 +30,14 @@ export function getRoomById(room_id){
 
 
 //Reservations 
+export function getAllReservations(){
+  return axios.get(API_BASE_URL + "/reservation/", autorization);
+}
+
+export function getAllReservationsByUserId(user_id){
+  return axios.get(API_BASE_URL + "/reservation/user/"+user_id, autorization);
+}
+
 export function getAllReservationsForCurrentUser(){
   return axios.get(API_BASE_URL + "/reservation/current_user", autorization);
 }
@@ -48,11 +56,37 @@ export function modifyReservation(reservationRequest){
 
 }
 
+// Rents
+export function getAllRents(){
+  return axios.get(API_BASE_URL + "/rent/", autorization);
+}
+
+export function getAllRentsByUserId(user_id){
+  return axios.get(API_BASE_URL + "/rent/user/"+user_id, autorization);
+}
+
+export function addARent(rentRequest){
+  return axios.post(API_BASE_URL + "/rent/add", rentRequest, autorization);
+}
+
 
 //Claim
 export function addClaim(claimRequest){
   return axios.post(API_BASE_URL + "/claim/", claimRequest, autorization);
+}
 
+export function getAllClaims(){
+  return axios.get(API_BASE_URL + "/claim/", autorization);
+}
+
+
+// Payment
+export function addPayment(paymentRequest){
+  return axios.post(API_BASE_URL + "/payment/add", paymentRequest, autorization);
+}
+
+export function getPaymentSumByRentId(rent_id){
+  return axios.get(API_BASE_URL + "/payment/sum/"+rent_id, autorization);
 }
 
 
@@ -61,7 +95,7 @@ export function getCurrentUserInfos(){
   return axios.get(API_BASE_URL + "/auth/user/myInfos", autorization)
 }
 
-export function getCurrentUser(user_id){
+export function getUserById(user_id){
   return axios.get(API_BASE_URL + "/auth/user/" + user_id, autorization)
 }
 
@@ -72,6 +106,12 @@ export function login(loginRequest) {
 export function signup(signupRequest) {
   return axios.post(API_BASE_URL + "/auth/signup", signupRequest);
 }
+
+export function getAllUsers(){
+  return axios.get(API_BASE_URL + "/auth/", autorization);
+}
+
+
 
 
 // Images

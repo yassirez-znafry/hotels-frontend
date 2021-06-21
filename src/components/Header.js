@@ -17,7 +17,6 @@ const [showDashboard, setShowDashboard] = useState(false);
 
 useEffect(() => {
     setUsername(localStorage.getItem("username"))
-    setUserInfos(localStorage.getItem("userInfos"))
     if(!localStorage.getItem("userInfos")){
       getCurrentUserInfos()
             .then((res) => {
@@ -28,9 +27,10 @@ useEffect(() => {
             })
             .catch((err) => console.log(err))
     }else{
-      setUserInfos(JSON.parse(localStorage.getItem("userInfos")));
-      if(userInfos.accessLevel >= 1) setShowDashboard(true);
-      console.log("------------------ OK -------------"+localStorage.getItem("userInfos"))
+      let jsonUserInfos = JSON.parse(localStorage.getItem("userInfos"))
+      setUserInfos(jsonUserInfos);
+      if(jsonUserInfos.accessLevel >= 1) setShowDashboard(true);
+      console.log("------------------ OK --   -----------"+localStorage.getItem("userInfos"))
     }
   }, []);
 
