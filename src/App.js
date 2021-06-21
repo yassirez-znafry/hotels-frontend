@@ -9,6 +9,8 @@ import LoginScreen from './screens/loginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import RoomScreen from './screens/RoomScreen';
+import ReservationScreen from './screens/ReservationScreen';
+import ClaimScreen from './screens/ClaimScreen';
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
           <Route path='/register' component={RegisterScreen} exact />
           <Route path='/room/:id' component={RoomScreen} />
           <Route path='/profile' component={ProfileScreen} />
+          <Route path='/reservation/:id' component={ReservationScreen} />
+          <Route path='/claim' component={ClaimScreen} />
 
       </Container>
     </main>

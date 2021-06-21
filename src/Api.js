@@ -43,6 +43,18 @@ export function deleteReservation(reservationRequest){
 
 }
 
+export function modifyReservation(reservationRequest){
+  return axios.post(API_BASE_URL + "/reservation/modify", reservationRequest, autorization);
+
+}
+
+
+//Claim
+export function addClaim(claimRequest){
+  return axios.post(API_BASE_URL + "/claim", claimRequest, autorization);
+
+}
+
 
 // Auth
 export function getCurrentUserInfos(){

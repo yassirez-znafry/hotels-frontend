@@ -54,6 +54,10 @@ const HomeScreen = () => {
     window.location = "/reservation/"+reservationId;
   }
 
+  function handleClaim(e){
+    e.preventDefault();
+    window.location = "/claim/";
+  }
   
   console.log(reservations)
   console.log(userInfos)
@@ -79,17 +83,21 @@ const HomeScreen = () => {
 
                 {reservations.map((reservation, index) => {
                     return<><br/><Row>
-                            <Col>{index}</Col>
+                            <Col>{reservation.reservationId}</Col>
                             <Col>{reservation.roomId}</Col>
                             <Col>{reservation.reservationCheckInDate}</Col>
                             <Col>{reservation.reservationCheckOutDate}</Col>
                             <Col>{reservation.adultsNumber}</Col>
                             <Col>{reservation.childrenNumber}</Col>
                             <Col><a href="#" onClick={(e) => handleDelete(e, reservation.reservationId)}><i class="fas fa-trash"></i></a></Col>
-                            <Col><a href="#" onClick={(e) => handleUpdate(e, index)}><i class="fas fa-pen"></i></a></Col>
+                            <Col><a href="#" onClick={(e) => handleUpdate(e, reservation.reservationId)}><i class="fas fa-pen"></i></a></Col>
                             </Row></>
                 })}
+                
             </Container>
+            <Button block size="" href="#" onClick={(e) => handleClaim(e)} style={{backgroundColor: "lightblue", marginTop: "100px"}}>
+          Add Claim
+        </Button>
         </div>
     )
 }
