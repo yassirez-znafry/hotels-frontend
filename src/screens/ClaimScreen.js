@@ -32,9 +32,10 @@ const ClaimScreen = () => {
 
     console.log(claimRequest)
 
-    addClaim(console.log(claimRequest))
+    addClaim(claimRequest)
       .then((res) => {
         console.log(res.data)
+        alert("Claim sent successfully");
       })
       .catch((err) => console.log(err))
   }

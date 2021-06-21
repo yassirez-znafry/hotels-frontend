@@ -8,7 +8,7 @@ const Room = ({room}) => {
     return (
         <Card className='my-3 p-3 rounded'>
       <Link to={`/room/${room.roomId}`}>
-        <Card.Img src='/logo192.png' variant='top' />
+        <Card.Img src='/room.jpeg' variant='top' />
       </Link>
 
       <Card.Body>

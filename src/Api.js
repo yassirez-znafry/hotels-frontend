@@ -51,7 +51,7 @@ export function modifyReservation(reservationRequest){
 
 //Claim
 export function addClaim(claimRequest){
-  return axios.post(API_BASE_URL + "/claim", claimRequest, autorization);
+  return axios.post(API_BASE_URL + "/claim/", claimRequest, autorization);
 
 }
 

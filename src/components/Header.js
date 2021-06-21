@@ -27,6 +27,10 @@ useEffect(() => {
               console.log("------------------ OK -------------"+localStorage.getItem("userInfos"))
             })
             .catch((err) => console.log(err))
+    }else{
+      setUserInfos(JSON.parse(localStorage.getItem("userInfos")));
+      if(userInfos.accessLevel >= 1) setShowDashboard(true);
+      console.log("------------------ OK -------------"+localStorage.getItem("userInfos"))
     }
   }, []);
 
