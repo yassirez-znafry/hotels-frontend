@@ -31,8 +31,12 @@ const ClaimScreen = () => {
       .then((res) => {
         console.log(res.data)
         alert("Claim sent successfully");
+        window.location = "/profile"
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        alert("Something went wrong!! Try again later.")
+        console.log(err)
+      })
   }
   
 

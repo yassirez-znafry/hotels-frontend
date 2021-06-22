@@ -54,6 +54,7 @@ const DashboardUserScreen = ({match}) => {
     addARent(rentRequest)
     .then((res) => {
         alert("Rent added successfully");
+        window.location.reload();
     })
     .catch((err) => {console.log(err);alert("Something went wrong!! Try again!");})
   }

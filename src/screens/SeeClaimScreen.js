@@ -84,7 +84,7 @@ return (
                             <Col>{claim.content}</Col>
                             <Col>{claim.processed ? "True" : "False"}</Col>
                             <Col>{claim.userId}</Col>
-                            <Col><a href="#" onClick={(e) => handleProcess(e, claim.id)}>process</a></Col>
+                            <Col>{claim.processed ? "" :<a href="#" onClick={(e) => handleProcess(e, claim.id)}>process</a>}</Col>
 
                               
 

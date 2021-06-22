@@ -74,7 +74,8 @@ const DashboardScreen = () => {
 
     deleteRoomById(rooms[index].roomId)
     .then((res) => {
-      alert("Room deleted!! Refresh the page.")
+      alert("Room deleted successfully!!")
+      window.location.reload()
       console.log(res.data)
     })
     .catch((err) => {
@@ -213,7 +214,7 @@ const DashboardScreen = () => {
             
             <br/><hr/><br/>
 
-            <center><h3>All Rooms - {rooms.length} - <a href="#"  onClick={(e) => handleAddRoom(e)}> Add New Room </a></h3></center>
+            <center><h3>All Rooms - {rooms.length} - <Button href="#"  onClick={(e) => handleAddRoom(e)}> Add New Room </Button></h3></center>
             <br/>
             <br/>
             <Container>

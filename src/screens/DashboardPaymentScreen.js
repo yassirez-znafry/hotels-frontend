@@ -44,6 +44,7 @@ const DashboardPaymentScreen = ({match}) => {
       .then((res) => {
         console.log(res.data)
         alert("Payment added successfully");
+        window.history.back()
       })
       .catch((err) => {console.log(err); alert("Payment failed!! Try again later!!");})
   }

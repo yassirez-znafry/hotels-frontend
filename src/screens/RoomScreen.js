@@ -59,8 +59,12 @@ const RoomScreen = ({match}) => {
       .then((res) => {
         console.log(res.data)
         alert("Reservation added successfully")
+        window.location = "/profile"
       })
-      .catch((err) => {console.log(err); alert("Adding reservation failed")})
+      .catch((err) => {
+        alert("Something went wrong!! Try again later.")
+        console.log(err)
+      })
     
 
 
