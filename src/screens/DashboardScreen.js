@@ -56,6 +56,11 @@ const DashboardScreen = () => {
     window.location = "/dashboard_user/"+userId;
   }
 
+  function handleSeeClaim(e, claimID){
+    e.preventDefault();
+    window.location = "/dashboard_claim/"+claimID;
+  }
+
 
   return (
     <div>
@@ -96,7 +101,8 @@ const DashboardScreen = () => {
                   <Col>ClaimId</Col>  
                   <Col>Content</Col>  
                   <Col>Processed</Col> 
-                  <Col>UserId</Col> 
+                  <Col>UserId</Col>
+                  <Col>See claim</Col> 
                 </Row>
                 <hr/>
 
@@ -106,6 +112,8 @@ const DashboardScreen = () => {
                             <Col>{claim.content}</Col>
                             <Col>{claim.processed ? "True" : "False"}</Col>
                             <Col>{claim.userId}</Col>
+                             <Col><a href="#" onClick={(e) => handleSeeClaim(e, claim.id)}>See Claim</a></Col> 
+
                             </Row></>
                 })}
                 

@@ -14,6 +14,8 @@ import ClaimScreen from './screens/ClaimScreen';
 import DashboardScreen from './screens/DashboardScreen';
 import DashboardUserScreen from './screens/DashboardUserScreen';
 import DashboardPaymentScreen from './screens/DashboardPaymentScreen';
+import SeeClaimScreen from './screens/SeeClaimScreen';
+
 
 
 function App() {
@@ -31,6 +33,7 @@ function App() {
           <Route path='/profile' component={ProfileScreen} />
           <Route path='/reservation/:id' component={ReservationScreen} />
           <Route path='/claim' component={ClaimScreen} />
+          <Route path='/dashboard_claim/:id' component={SeeClaimScreen} />
           <Route path='/dashboard_user/:id' component={DashboardUserScreen} />
           <Route path='/dashboard' component={DashboardScreen} />
           <Route path='/dashboard_payment/:user_id/:rent_id' component={DashboardPaymentScreen} />

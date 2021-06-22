@@ -79,6 +79,13 @@ export function getAllClaims(){
   return axios.get(API_BASE_URL + "/claim/", autorization);
 }
 
+export function getClaimById(claimId){
+  return axios.get(API_BASE_URL + "/claim/" + claimId, autorization)
+}
+
+export function updateClaim(claimId, claimRequest){
+  return axios.put(API_BASE_URL + "/claim/" + claimId, claimRequest, autorization)
+}
 
 // Payment
 export function addPayment(paymentRequest){
