@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col , Container} from 'react-bootstrap'
-import { getAllClaims, getAllRents, getAllReservations, getAllUsers} from "../Api";
+import { deleteRoomById, getAllClaims, getAllRents, getAllReservations, getAllRooms, getAllUsers} from "../Api";
 
 const DashboardScreen = () => {
   
@@ -9,6 +9,7 @@ const DashboardScreen = () => {
   const [reservations, setReservations] = useState([]);
   const [rents, setRents] = useState([]);
   const [users, setUsers] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const [claims, setClaims] = useState([]);
   
 
@@ -48,6 +49,13 @@ const DashboardScreen = () => {
     })
     .catch((err) => console.log(err))
 
+    getAllRooms()
+    .then((res) => {
+        setRooms(res.data)
+        console.log(res.data)
+    })
+    .catch((err) => console.log(err))
+
 
   }, []);
 
@@ -59,6 +67,36 @@ const DashboardScreen = () => {
   function handleSeeClaim(e, claimID){
     e.preventDefault();
     window.location = "/dashboard_claim/"+claimID;
+  }
+
+  function handleDeleteRoom(e, index){
+    e.preventDefault();
+
+    deleteRoomById(rooms[index].roomId)
+    .then((res) => {
+      alert("Room deleted!! Refresh the page.")
+      console.log(res.data)
+    })
+    .catch((err) => {
+      alert("Something went wrong!! Try again later!!")
+      console.log(err)
+      console.log(rooms[index])
+    })
+    
+  }
+
+  function handleModifyRoom(e, index){
+    e.preventDefault();
+    console.log(rooms[index]);
+    window.location = "/dashboard_modify_room/" + rooms[index].roomId
+  }
+
+  function handleAddRoom(e){
+    e.preventDefault()
+    if(JSON.parse(localStorage.getItem("userInfos")).accessLevel == 2){
+      console.log(JSON.parse(localStorage.getItem("userInfos")).accessLevel)
+      window.location = "/dashboard_add_room"
+    }
   }
 
 
@@ -171,6 +209,37 @@ const DashboardScreen = () => {
                 })}
                 
             </Container>
+
+            
+            <br/><hr/><br/>
+
+            <center><h3>All Rooms - {rooms.length} - <a href="#"  onClick={(e) => handleAddRoom(e)}> Add New Room </a></h3></center>
+            <br/>
+            <br/>
+            <Container>
+                <Row>
+                  <Col>Room Number</Col>  
+                  <Col>Price</Col>  
+                  <Col>Type</Col> 
+                  <Col>Status</Col> 
+                  <Col>Delete</Col>
+                  <Col>Modify</Col>
+                </Row>
+                <hr/>
+
+                {rooms.map((room, index) => {
+                    return<><br/><Row>
+                            <Col>{room.roomNumber}</Col>
+                            <Col>{room.roomPrice}</Col>
+                            <Col>{room.roomType}</Col>
+                            <Col>{room.roomStatus}</Col>
+                            <Col><a href="#" onClick={(e) => handleDeleteRoom(e, index)}>Delete</a></Col>
+                            <Col><a href="#" onClick={(e) => handleModifyRoom(e, index)}>Modify</a></Col>
+                            </Row></>
+                })}
+                
+            </Container>
+            
 
         </div>
   );

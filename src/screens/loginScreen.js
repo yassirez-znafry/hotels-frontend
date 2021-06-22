@@ -32,6 +32,7 @@ const LoginScreen = () => {
         
         })
         .catch((err) => {
+          alert("Something went wrong!! Try again using different credentials");
           console.log(err);
         });
   }

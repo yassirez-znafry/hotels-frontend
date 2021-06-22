@@ -63,6 +63,9 @@ console.log(claim)
   
 
 return (
+  <>
+
+        <br/><br/>
         <Container>
            <Row>
                   <Col>ClaimId</Col>  
@@ -71,6 +74,8 @@ return (
                   <Col>user Id</Col>
                   <Col>Make as processed</Col> 
                 </Row>
+
+                <br/><hr/><br/>
                 
 
                 
@@ -79,13 +84,15 @@ return (
                             <Col>{claim.content}</Col>
                             <Col>{claim.processed ? "True" : "False"}</Col>
                             <Col>{claim.userId}</Col>
-                            <Col><Button href="#" onClick={(e) => handleProcess(e, claim.id)}>process</Button></Col>
+                            <Col><a href="#" onClick={(e) => handleProcess(e, claim.id)}>process</a></Col>
 
                               
 
                             </Row>
                 
         </Container>
+
+        </>
     )
 }
 

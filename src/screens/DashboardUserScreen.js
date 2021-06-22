@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col , Container} from 'react-bootstrap'
-import { addARent, getAllClaims, getAllRents, getAllRentsByUserId, getAllReservations, getAllReservationsByUserId, getAllUsers, getUserById} from "../Api";
+import { increaseAccessLevel, addARent, getAllClaims, getAllRents, getAllRentsByUserId, getAllReservations, getAllReservationsByUserId, getAllUsers, getUserById} from "../Api";
 
 const DashboardUserScreen = ({match}) => {
 
@@ -63,6 +63,19 @@ const DashboardUserScreen = ({match}) => {
     window.location = `/dashboard_payment/${userId}/${rentId}`   
   }
 
+  function handleLevelUp(e){
+    e.preventDefault();
+
+    increaseAccessLevel(user)
+    .then((res) => {
+      alert("Access level updated successfully!! Refresh to see changes!!");
+    })
+    .catch((err) => {
+      alert("Something went wrong!! Try again later!!");
+      console.log(err)
+    });
+  }
+
   return (
     <div>
             <br/>
@@ -73,12 +86,14 @@ const DashboardUserScreen = ({match}) => {
                   <Col>UserId</Col>  
                   <Col>Email</Col>  
                   <Col>Access Level</Col>
+                  {user.accessLevel == 0 ? <Col>Level Up</Col> : ""}
                 </Row>
                 <hr/>
                 <Row>
                   <Col>{user.id}</Col>  
                   <Col>{user.email}</Col>  
                   <Col>{user.accessLevel}</Col>
+                  {user.accessLevel == 0 ? <Col><a href="" onClick={(e) => handleLevelUp(e)}>Level Up</a></Col> : ""}
                 </Row>
             </Container>
             <br/>

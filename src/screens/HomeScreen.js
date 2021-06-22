@@ -27,6 +27,9 @@ const HomeScreen = () => {
    return (
 
       <>
+            <br/>
+            <center><h3>All Rooms</h3></center>
+            <br/>
           <Row >
             
             {rooms.map(function(room, index){  

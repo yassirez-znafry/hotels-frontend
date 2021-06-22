@@ -76,7 +76,7 @@ const RoomScreen = ({match}) => {
         
           <Row>
             <Col md={6}>
-              <Image src='/logo192.png' alt="{room.name}" fluid />
+              <Image src='/room.jpeg' alt="{room.name}" fluid />
             </Col>
             <Col md={3}>
               <ListGroup variant='flush'>
@@ -136,6 +136,7 @@ const RoomScreen = ({match}) => {
           </Row>
           
 
+        <br/><br/>
           <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="adultsNumber">
           <Form.Label>Adults Number</Form.Label>

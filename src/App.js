@@ -15,6 +15,8 @@ import DashboardScreen from './screens/DashboardScreen';
 import DashboardUserScreen from './screens/DashboardUserScreen';
 import DashboardPaymentScreen from './screens/DashboardPaymentScreen';
 import SeeClaimScreen from './screens/SeeClaimScreen';
+import DashboardModifyRoomScreen from './screens/DashboardModifyRoomScreen';
+import DashboardAddRoomScreen from './screens/DashboardAddRoomScreen';
 
 
 
@@ -37,6 +39,8 @@ function App() {
           <Route path='/dashboard_user/:id' component={DashboardUserScreen} />
           <Route path='/dashboard' component={DashboardScreen} />
           <Route path='/dashboard_payment/:user_id/:rent_id' component={DashboardPaymentScreen} />
+          <Route path='/dashboard_modify_room/:room_id' component={DashboardModifyRoomScreen} />
+          <Route path='/dashboard_add_room' component={DashboardAddRoomScreen} />
           
 
       </Container>

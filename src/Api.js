@@ -28,6 +28,31 @@ export function getRoomById(room_id){
   return axios.get(API_BASE_URL + "/room/"+room_id);
 }
 
+export function deleteRoomById(roomId){
+  return axios.post(API_BASE_URL + "/room/delete/"+ roomId, autorization);
+}
+
+export function modifyRoom(roomRequest){
+  return axios.post(API_BASE_URL + "/room/modify", roomRequest, autorization);
+}
+
+export function addRoom(roomRequest){
+  return axios.post(API_BASE_URL + "/room/add", roomRequest, autorization);
+}
+
+// Room Types
+
+export function getAllRoomTypes(){
+  return axios.get(API_BASE_URL + "/room_type/", autorization);
+}
+
+// Room Statuses
+export function getAllRoomStatuses(){
+  return axios.get(API_BASE_URL + "/room_status/", autorization);
+}
+
+
+
 
 //Reservations 
 export function getAllReservations(){
@@ -116,6 +141,10 @@ export function signup(signupRequest) {
 
 export function getAllUsers(){
   return axios.get(API_BASE_URL + "/auth/", autorization);
+}
+
+export function increaseAccessLevel(userRequest){
+  return axios.post(API_BASE_URL + "/auth/level_up", userRequest, autorization);
 }
 
 

@@ -39,9 +39,11 @@ const RegisterScreen = () => {
 
       signup(signupRequest)
         .then((res) => {
+          alert("Activation email sent!!")
           console.log(res.data);
         })
         .catch((err) => {
+          alert("Something went wrong!! Try agin later!!")
           console.log(err);
         });
 
@@ -69,17 +71,6 @@ const RegisterScreen = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </Form.Group>
-        <Form.Group size="lg" controlId="userType">
-          <Form.Label>You are a   </Form.Label>
-          <select id="dropdown" onChange={handleDropdownChange}  style={{marginLeft:20}}>
-
-              <option value="x"></option>
-              <option value="0">Customer</option>
-              <option value="1">Front Desk Service</option>
-              <option value="2">Manager</option>
-              
-            </select>
         </Form.Group>
         <Form.Group size="lg" controlId="password">
           <Form.Label>Password</Form.Label>
