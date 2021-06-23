@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { addRoom, getAllRoomStatuses, getAllRoomTypes } from "../Api";
+import { addRoom, getAllRoomStatuses, getAllRoomTypes, uploadImage } from "../Api";
 import { Row, Col, Image, Button, Form} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 
@@ -15,6 +15,7 @@ const DashboardAddRoomScreen = () => {
     const [roomPrice, setRoomPrice] = useState(0)
     const [roomType, setRoomType] = useState("")
     const [roomStatus, setRoomStatus] = useState("")
+  const [fileName, setFileName] = useState("")
   
   useEffect(() => {
     if(!localStorage.getItem("username")){
@@ -39,6 +40,20 @@ const DashboardAddRoomScreen = () => {
 
   }, []);
 
+  const uploadImageHandler = async (e) => {
+    const file = e.target.files[0]
+    console.log(file.name)
+    setFileName(file.name)
+    
+    const formData = new FormData()
+    formData.append('data', file)
+
+    uploadImage(formData, roomNumber).then((res) => {
+      console.log(res.data);
+    })
+      .catch((err) => console.log(err))
+    
+  };
 
   function handleSubmit(e){
       e.preventDefault()
@@ -47,7 +62,8 @@ const DashboardAddRoomScreen = () => {
         roomType,
         roomStatus,
         roomPrice,
-        roomNumber
+        roomNumber,
+        roomImage: "/" + roomNumber + "." + fileName.split('.').pop()
       }
 
         console.log(roomInfos);
@@ -122,8 +138,28 @@ const DashboardAddRoomScreen = () => {
                 })}
             </Form.Control>
         </Form.Group>
+
+          <Form.Group controlId='image'>
+            <Form.Label>Room image </Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='Enter the image'
+              value={fileName}
+
+            ></Form.Control>
+            <Form.File
+              id='image-file'
+              label='Choose File'
+              custom
+              onChange={uploadImageHandler}
+            ></Form.File>
+          </Form.Group>
+
+
+
+
         <Button block size="lg" type="submit">
-          Reserve
+          Add room
         </Button>
       </Form>
 

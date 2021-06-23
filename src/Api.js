@@ -151,8 +151,8 @@ export function increaseAccessLevel(userRequest){
 
 
 // Images
-export function uploadImage(file) {
-  return axios.post(API_BASE_URL + "/auth/upload", file, autorization);
+export function uploadImage(file, roomNumber) {
+  return axios.post(API_BASE_URL + "/auth/upload/"+roomNumber+"/", file, autorization);
 }
 
 export function getImage() {
