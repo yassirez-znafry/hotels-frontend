@@ -18,6 +18,10 @@ const DashboardPaymentScreen = ({match}) => {
       };
 
       const [paymentInfos, setPaymentInfos] = useState({});
+
+      const [withCash, setWithCash] = useState(true)
+      const [accountNumber, setAccountNumber] = useState(null)
+    
     
   
   useEffect(() => {
@@ -38,7 +42,10 @@ const DashboardPaymentScreen = ({match}) => {
   function handleSubmit(event) {
     event.preventDefault();
 
+    paymentRequest.accountNumber = accountNumber
+    paymentRequest.withCash = withCash
     console.log(paymentRequest)
+
 
     addPayment(paymentRequest)
       .then((res) => {
@@ -54,7 +61,7 @@ const DashboardPaymentScreen = ({match}) => {
     return (
         <>
              <Form onSubmit={handleSubmit}>
-        <Form.Group size="sm" controlId="content">
+        <Form.Group size="sm" controlId="totalPrice">
           <Form.Label>Total Price</Form.Label>
           <Form.Control
             type="string"
@@ -62,7 +69,32 @@ const DashboardPaymentScreen = ({match}) => {
             disabled
           />
         </Form.Group>
+
+        <Form.Group size="lg" controlId="paymentMethod">
+          <Form.Label>Payment Method</Form.Label>
+          <Form.Control
+            type="number"
+            onChange={(e) => {
+              if(e.target.value == "cash") setWithCash(true)
+              else if(e.target.value == "card") setWithCash(false)
+            }}
+            as="select">
+                <option value="cash">Cash</option>
+                <option value="card">Card</option>
+            </Form.Control>
+        </Form.Group>
         
+        <Form.Group size="sm" controlId="accountNumber">
+          <Form.Label>Account Number</Form.Label>
+          <Form.Control
+            type="number"
+            value={accountNumber}
+            onChange={(e) => setAccountNumber(e.target.value)}
+            disabled={withCash ? "disabled" : "" }
+          />
+        </Form.Group>
+
+
         <Button block size="lg" type="submit">
           Add Payment
         </Button>

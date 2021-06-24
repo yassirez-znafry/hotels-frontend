@@ -85,55 +85,15 @@ const RoomScreen = ({match}) => {
             <Col md={3}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h3>{room.roomStatus}</h3>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  
+                  <h3>{room.roomType}</h3>
                 </ListGroup.Item>
                 <ListGroup.Item>Price: ${room.roomPrice}</ListGroup.Item>
                 <ListGroup.Item>
-                  Description: {room.roomType}
+                  Status: {room.roomStatus}
                 </ListGroup.Item>
               </ListGroup>
             </Col>
-            <Col md={3}>
-              <Card>
-                <ListGroup variant='flush'>
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Price:</Col>
-                      <Col>
-                        <strong>${room.roomPrice}</strong>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Status:</Col>
-                      <Col>
-                        {room.roomId > 0 ? 'In Stock' : 'Out Of Stock'}
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-
-                  
-
-                  <ListGroup.Item>
-                      <Link to="/payment">
-                    <Button
-                      
-                      className='btn-block'
-                      type='button'
-                      disabled={room.roomPrice === 0}
-                    >
-                      Reserve
-                    </Button>
-                    </Link>
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card>
-            </Col>
+            
           </Row>
           <Row>
             
